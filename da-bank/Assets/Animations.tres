@@ -1,12 +1,13 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://8s02amvmx7qs"]
 
-[ext_resource type="Texture2D" uid="uid://c71b562ru51vu" path="res://icon.svg" id="1_abkds"]
+[ext_resource type="Texture2D" uid="uid://byjn58gd0dnb4" path="res://police.tres" id="2_8rfqv"]
+[ext_resource type="Texture2D" uid="uid://ciadxixp7g4a4" path="res://milly.tres" id="3_kmra8"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("2_8rfqv")
 }],
 "loop": true,
 "name": &"EnemyFall",
@@ -14,7 +15,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("2_8rfqv")
 }],
 "loop": true,
 "name": &"EnemyIdle",
@@ -22,7 +23,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("2_8rfqv")
 }],
 "loop": false,
 "name": &"EnemyJump",
@@ -30,7 +31,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("2_8rfqv")
 }],
 "loop": true,
 "name": &"EnemyMove",
@@ -38,20 +39,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("3_kmra8")
 }],
 "loop": true,
 "name": &"PlayerFall",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kmra8")
+}],
 "loop": true,
 "name": &"PlayerIdle",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("3_kmra8")
 }],
 "loop": false,
 "name": &"PlayerJump",
@@ -59,7 +63,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("3_kmra8")
 }],
 "loop": true,
 "name": &"PlayerMove",
