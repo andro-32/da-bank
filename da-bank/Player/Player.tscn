@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c71b562ru51vu" path="res://icon.svg" id="1_3qydi"]
 [ext_resource type="PackedScene" uid="uid://cirdkc8w460e2" path="res://Player/Particles.tscn" id="2_q3lat"]
 [ext_resource type="Script" uid="uid://cljl4d0j55i5m" path="res://Player/Scripts/camera_pivot.gd" id="3_tok1r"]
+[ext_resource type="PackedScene" uid="uid://ly61atxdll68" path="res://UI/hud.tscn" id="4_ddoul"]
 
 [sub_resource type="GDScript" id="GDScript_q3lat"]
 script/source = "extends Character
@@ -31,6 +32,8 @@ height = 174.0
 
 [node name="Player" type="CharacterBody2D" unique_id=664525115]
 script = SubResource("GDScript_q3lat")
+SPEED = 1000.0
+JUMP_VELOCITY = -550.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1059273306]
 scale = Vector2(0.9062499, 1.3593751)
@@ -48,3 +51,5 @@ script = ExtResource("3_tok1r")
 [node name="Camera2D" type="Camera2D" parent="CameraPivot" unique_id=1784772064]
 offset = Vector2(0, -75)
 zoom = Vector2(0.775, 0.775)
+
+[node name="Hud" parent="." unique_id=466858541 instance=ExtResource("4_ddoul")]
