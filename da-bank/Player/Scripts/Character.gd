@@ -8,9 +8,12 @@ class_name Character
 @onready var jump_particles := $Particles/JumpDust
 @onready var move_particles := $Particles/Dust
 @onready var speed_lines := $Particles/SpeedLines
+@onready var sprite := $Sprite2D
 
 var jumping := false
 
+func animation_playing(animation: String) -> bool:
+	return sprite.animation == name + animation and sprite.is_playing()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -19,7 +22,10 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if jumping:
-		jumping = false
+		sprite.stop()
+		sprite.speed_scale = 1.0
+		sprite.play(name + "Jump")
+		sprite.animation = name + "Jump"
 		velocity.y = JUMP_VELOCITY
 		jump_particles.emitting = true
 
@@ -50,4 +56,21 @@ func _physics_process(delta: float) -> void:
 	if (abs(velocity.x)) + (abs(velocity.y)) >= 75.0: speed_lines.emitting = true
 	else: speed_lines.emitting = false
 
+	if is_on_floor() and !jumping:
+		if abs(velocity.x) >= 15.0:
+			if !animation_playing(name + "Move") and !animation_playing("Jump") and !animation_playing("Fall"): sprite.stop()
+			if abs(velocity.x) != velocity.x: sprite.flip_h = true
+			else: sprite.flip_h = false
+			sprite.speed_scale = abs(velocity.x)/SPEED
+			sprite.play(name + "Move")
+		else:
+			if !animation_playing("Idle") and !animation_playing("Jump") and !animation_playing("Fall"): sprite.stop()
+			sprite.speed_scale = 1.0
+			sprite.play(name + "Idle",1.0)
+	else:
+		if !(animation_playing("Jump")) and !jumping:
+			sprite.speed_scale = 1.0
+			sprite.play(name + "Fall")
+
+	jumping = false
 	move_and_slide()
