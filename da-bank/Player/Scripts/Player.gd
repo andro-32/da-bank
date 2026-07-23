@@ -6,6 +6,6 @@ func _physics_process(delta: float) -> void:
 		jumping = true
 
 	var direction := Input.get_axis("left", "right")
-	velocity.x = lerp(velocity.x,direction * SPEED,ACCELERATION)
+	vel.x = direction * SPEED
 
 	super(delta)

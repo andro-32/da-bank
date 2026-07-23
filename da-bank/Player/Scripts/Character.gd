@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Character
 
-@export var SPEED := 500.0
-@export var JUMP_VELOCITY := -600.0
+@export var SPEED := 750.0
+@export var JUMP_VELOCITY := -800.0
 @export var ACCELERATION := 0.1
 
 @onready var jump_particles := $Particles/JumpDust
@@ -11,11 +11,14 @@ class_name Character
 @onready var sprite := $Sprite2D
 
 var jumping := false
+var vel := Vector2.ZERO
 
 func animation_playing(animation: String) -> bool:
 	return sprite.animation == name + animation and sprite.is_playing()
 
 func _physics_process(delta: float) -> void:
+	velocity.x = lerp(velocity.x,vel.x,ACCELERATION)
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -73,4 +76,5 @@ func _physics_process(delta: float) -> void:
 			sprite.play(name + "Fall")
 
 	jumping = false
+	vel = Vector2.ZERO
 	move_and_slide()
