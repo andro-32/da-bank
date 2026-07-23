@@ -4,6 +4,7 @@ class_name Character
 @export var SPEED := 750.0
 @export var JUMP_VELOCITY := -800.0
 @export var ACCELERATION := 0.1
+@export var animation_key := ""
 
 @onready var jump_particles := $Particles/JumpDust
 @onready var move_particles := $Particles/Dust
@@ -14,7 +15,7 @@ var jumping := false
 var vel := Vector2.ZERO
 
 func animation_playing(animation: String) -> bool:
-	return sprite.animation == name + animation and sprite.is_playing()
+	return sprite.animation == animation_key + animation and sprite.is_playing()
 
 func _physics_process(delta: float) -> void:
 	velocity.x = lerp(velocity.x,vel.x,ACCELERATION)
@@ -27,8 +28,8 @@ func _physics_process(delta: float) -> void:
 	if jumping:
 		sprite.stop()
 		sprite.speed_scale = 1.0
-		sprite.play(name + "Jump")
-		sprite.animation = name + "Jump"
+		sprite.play(animation_key + "Jump")
+		sprite.animation = animation_key + "Jump"
 		velocity.y = JUMP_VELOCITY
 		jump_particles.emitting = true
 
@@ -61,19 +62,19 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_floor() and !jumping:
 		if abs(velocity.x) >= 15.0:
-			if !animation_playing(name + "Move") and !animation_playing("Jump") and !animation_playing("Fall"): sprite.stop()
+			if !animation_playing(animation_key + "Move") and !animation_playing("Jump") and !animation_playing("Fall"): sprite.stop()
 			if abs(velocity.x) != velocity.x: sprite.flip_h = true
 			else: sprite.flip_h = false
 			sprite.speed_scale = abs(velocity.x)/SPEED
-			sprite.play(name + "Move")
+			sprite.play(animation_key + "Move")
 		else:
 			if !animation_playing("Idle") and !animation_playing("Jump") and !animation_playing("Fall"): sprite.stop()
 			sprite.speed_scale = 1.0
-			sprite.play(name + "Idle",1.0)
+			sprite.play(animation_key + "Idle",1.0)
 	else:
 		if !(animation_playing("Jump")) and !jumping:
 			sprite.speed_scale = 1.0
-			sprite.play(name + "Fall")
+			sprite.play(animation_key + "Fall")
 
 	jumping = false
 	vel = Vector2.ZERO
